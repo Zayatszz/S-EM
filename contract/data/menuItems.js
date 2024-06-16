@@ -7,8 +7,6 @@ module.exports = [
     ],
   },
 
-  
-  
   {
     label: "Гэрээнүүд",  path:"/listing",
     subMenu: [

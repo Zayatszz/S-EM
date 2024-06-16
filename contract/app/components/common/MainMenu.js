@@ -10,7 +10,7 @@ const MainMenu = () => {
     return (
         <>
             {menuItems.map((menuItem, index) => (
-                <li className="" key={index}>
+                <li className="dropitem" key={index}>
                     <Link
                         className={
                             isParentActive(menuItem.subMenu, menuItem, path)
@@ -26,8 +26,8 @@ const MainMenu = () => {
                         }
                         href={menuItem.path ? menuItem.path : ""}
                     >
-                        {/* <span className="title">{menuItem.label}</span> */}
-                        <h4 className="">{menuItem.label}</h4>
+                        <span className="title">{menuItem.label}</span>
+
                         {/* <Link href={menuItem.path ? menuItem.path : "#"} className="title">{menuItem.label}</Link> */}
                          {/* <Link
                         href={menuItem.path ? menuItem.path : "#"}
