@@ -16317,7 +16317,7 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
 .btn-green:focus {
   color: #ffffff;
 }
-.btn-order {
+.btn-next {
   border: 1px solid #2583EF;
   border-radius: 8px;
   width: 100%;
@@ -16329,23 +16329,56 @@ span.ui-slider-handle.ui-corner-all.ui-state-default:focus-visible,
  
 }
 
-.btn-order.rounded {
+.btn-next.rounded {
   background-color: var(--primary-color);
   border-radius: 5px;
   color: #1a3760;
 }
 
-.btn-order:hover,
-.btn-order:active,
-.btn-order:focus {
+.btn-next:hover,
+.btn-next:active,
+.btn-next:focus {
   background-color: rgb(33, 112, 203);
   border-color: rgb(33, 112, 203);
   color: #1a3760;
 }
 
-.btn-order.white:hover,
-.btn-order.white:active,
-.btn-order.white:focus {
+.btn-next.white:hover,
+.btn-next.white:active,
+.btn-next.white:focus {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #1a3760;
+}
+.btn-cancel {
+  border: 1px solid rgba(177,178,185,1);
+  border-radius: 8px;
+  width: 100%;
+  color: #1a3760;
+  background: rgba(177,178,185,1);
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+ 
+}
+
+.btn-cancel.rounded {
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #1a3760;
+}
+
+.btn-cancel:hover,
+.btn-cancel:active,
+.btn-cancel:focus {
+  background-color: rgb(147, 147, 151);
+  border-color: rgb(147, 147, 151);
+  color: #1a3760;
+}
+
+.btn-cancel.white:hover,
+.btn-cancel.white:active,
+.btn-cancel.white:focus {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: #1a3760;

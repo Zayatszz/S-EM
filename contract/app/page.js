@@ -54,13 +54,13 @@
 
 
 // import Footer from "@/app/components/common/Footer";
-import DefaultHeader from "@/app/components/common/DefaultHeader";
+import DefaultHeader from "@/app/components/common/Header";
 // import MobileMenu from "@/app/components/common/MobileMenu";
 
 import Image from "next/image";
-export const metadata = {
-    title: "Listing V1 || Voiture - Automotive & Car Dealer NextJS Template",
-};
+// export const metadata = {
+//     title: "Listing V1 || Voiture - Automotive & Car Dealer NextJS Template",
+// };
 
 const ListingV1 = () => {
     return (
