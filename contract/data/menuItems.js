@@ -2,13 +2,13 @@
 module.exports = [
   
   {
-    label: "Гэрээ байгуулах", path:"/",
+    label: "Гэрээ байгуулах", path:"/contract",
     subMenu: [
     ],
   },
 
   {
-    label: "Гэрээнүүд",  path:"/listing",
+    label: "Гэрээнүүд",  path:"/contracts",
     subMenu: [
     ],
    
