@@ -1,5 +1,5 @@
 "use client";
-import menuItems from "@/data/menuItems";
+import userMenuItems from "@/data/userMenuItems";
 import { isParentActive } from "@/utils/isMenuActive";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,7 +9,7 @@ const MainMenu = () => {
 
     return (
         <>
-            {menuItems.map((menuItem, index) => (
+            {userMenuItems.map((menuItem, index) => (
                 <li className="dropitem" key={index}>
                     <Link
                         className={

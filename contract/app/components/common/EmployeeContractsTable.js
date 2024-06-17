@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 const ContractsTable = () => {
     const router = useRouter()
-    const handleRowClick = (bookingId) => {
-        router.push(`/contract`);
+    const handleRowClick = (id) => {
+        // router.push(`/contract`);
       };
   const contracts = [
     { id: 1011, position: 'Судалгааны ажилтан', employee: 'Болд', startDate: '2024.06.09', endDate: '2024.06.10', status: 'Амжилттай', action: 'view' },
@@ -14,6 +14,11 @@ const ContractsTable = () => {
     { id: 1013, position: 'Судалгааны ажилтан', employee: 'Хүслэн', startDate: '2024.06.09', endDate: '2024.06.10', status: 'Баталгаажуулах', action: 'edit' },
     { id: 1014, position: 'Судалгааны ажилтан', employee: 'Номио', startDate: '2024.06.09', endDate: '2024.06.10', status: 'Амжилттай', action: 'view' },
   ];
+  const handleStatusClick = (status) => {
+    if (status === 'Баталгаажуулах') {
+      router.push('/user/signature');
+    }
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -64,7 +69,13 @@ const ContractsTable = () => {
                 <td className="align-middle">{contract.employee}</td>
                 <td className="align-middle">{contract.startDate}</td>
                 <td className="align-middle">{contract.endDate}</td>
-                <td className={`align-middle ${getStatusColor(contract.status)}`}>{contract.status}</td>
+                
+                <td  onClick={() => handleStatusClick(contract.status)} className={`align-middle ${getStatusColor(contract.status)}`}>
+                
+                  {contract.status}
+                 
+                  </td>
+                
                 <td className="editing_list align-middle">
                   <ul>
                     <li className="list-inline-item mb-1">

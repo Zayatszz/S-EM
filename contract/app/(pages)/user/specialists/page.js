@@ -1,6 +1,6 @@
 'use client'
-import Header from "@/app/components/common/Header";
-import ContractsTable from "@/app/components/common/EmployerContractsTable";
+import Header from "@/app/components/common/HeaderUser";
+import Specialists from "@/app/components/common/Specialists";
 import React, { useState } from 'react';
 import Image from "next/image";
 import { DatePicker } from "antd";
@@ -13,7 +13,7 @@ const ListingV1 = () => {
       <div className="">
         <section className=" pt10 bgc-f9">
           <div className="container">
-          <ContractsTable/>
+          <Specialists/>
           </div>
         </section>
       </div>

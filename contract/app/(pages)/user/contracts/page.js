@@ -1,6 +1,6 @@
 'use client'
-import Header from "@/app/components/common/Header";
-import ContractsTable from "@/app/components/common/EmployerContractsTable";
+import Header from "@/app/components/common/HeaderUser";
+import ContractsTable from "@/app/components/common/EmployeeContractsTable";
 import React, { useState } from 'react';
 import Image from "next/image";
 import { DatePicker } from "antd";

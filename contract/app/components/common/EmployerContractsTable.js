@@ -15,22 +15,6 @@ const ContractsTable = () => {
     { id: 1014, position: 'Судалгааны ажилтан', employee: 'Номио', startDate: '2024.06.09', endDate: '2024.06.10', status: 'Амжилттай', action: 'view' },
     { id: 1015, position: 'Судалгааны ажилтан', employee: 'Бөртэ', startDate: '2024.06.09', endDate: '2024.06.10', status: 'Амжилттай', action: 'view' },
   ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Амжилттай':
-        return 'text-success';
-      case 'Амжилтгүй':
-        return 'text-danger';
-      case 'Баталгаажуулах':
-        return 'text-primary';
-      default:
-        return '';
-    }
-  };
-
-
-
   return (
     <div className="container mt-4">
 

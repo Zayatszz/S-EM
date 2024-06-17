@@ -1,5 +1,5 @@
 'use client'
-import DefaultHeader from "@/app/components/common/Header";
+import Header from "@/app/components/common/Header";
 import React, { useState } from 'react';
 import Image from "next/image";
 import { DatePicker } from "antd";
@@ -305,7 +305,7 @@ const ListingV1 = () => {
 
   return (
     <div className="wrapper">
-      <DefaultHeader />
+      <Header />
       <div className="">
         <section className="our-pricing pb10 pt20 bgc-f9">
           <div className="container">
