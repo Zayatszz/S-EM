@@ -8,6 +8,7 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   // Function to handle form submission
   const handleSignup = async (e) => {
@@ -25,13 +26,27 @@ const Form = () => {
   return (
     <form onSubmit={handleSignup}>
       <div className="row">
-        <div className="col-lg-6">
+      <div className="col-lg-6">
           <div className="form-group">
-            <label className="form-label">First Name</label>
+            <label className="form-label">Овог</label>
             <input
               type="text"
               className="form-control"
-              placeholder="First Name"
+              placeholder="Овог"
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+        </div>
+        {/* End .col */}
+        <div className="col-lg-6">
+          <div className="form-group">
+            <label className="form-label">Нэр</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Нэр"
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -40,31 +55,31 @@ const Form = () => {
         </div>
         {/* End .col */}
 
+       
+
         <div className="col-lg-6">
           <div className="form-group">
-            <label className="form-label">Last Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Last Name"
-              required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-        </div>
-        {/* End .col */}
-
-        <div className="col-lg-12">
-          <div className="form-group">
-            <label className="form-label">Email</label>
+            <label className="form-label">И-мэйл</label>
             <input
               type="email"
               className="form-control"
-              placeholder="Email"
+              placeholder="И-мэйл хаягаа оруулна уу."
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-lg-6">
+          <div className="form-group">
+            <label className="form-label">Утасны дугаар</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Утасны дугаараа оруулна уу."
+              required
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>
         </div>
@@ -72,11 +87,11 @@ const Form = () => {
 
         <div className="col-lg-6">
           <div className="form-group mb20">
-            <label className="form-label">Password</label>
+            <label className="form-label">Нууц үг</label>
             <input
               type="password"
               className="form-control"
-              placeholder="Password"
+              placeholder="Нууц үг"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -87,11 +102,11 @@ const Form = () => {
 
         <div className="col-lg-6">
           <div className="form-group mb20">
-            <label className="form-label">Confirm Password</label>
+            <label className="form-label">Нууц үгээ давтан оруулна уу.</label>
             <input
               type="password"
               className="form-control"
-              placeholder="Confirm Password"
+              placeholder="Нууц үг"
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -101,7 +116,7 @@ const Form = () => {
         {/* End .col */}
       </div>
       {/* End .row */}
-      <button type="submit" className="btn btn-primary btn-block mt-4">Бүртгүүлэх</button>
+      <button type="submit" className="btn btn-primary btn-block ">Бүртгүүлэх</button>
     </form>
   );
 };

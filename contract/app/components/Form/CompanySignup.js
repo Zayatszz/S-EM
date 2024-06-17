@@ -96,7 +96,7 @@ const Form = () => {
         {/* End .col */}
       </div>
       {/* End .row */}
-      <button type="submit" className="btn btn-primary btn-block mt-4">Бүртгүүлэх</button>
+      <button type="submit" className="btn btn-primary btn-block ">Бүртгүүлэх</button>
     </form>
   );
 };
