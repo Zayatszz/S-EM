@@ -1,8 +1,7 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 
-const Form = () => {
-  // States for each form field
+const EmployerForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -10,23 +9,47 @@ const Form = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  // Function to handle form submission
   const handleSignup = async (e) => {
-   
-  
-    // Check if passwords match
+    e.preventDefault();
+
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
-      return; // Stop the signup process if passwords don't match
+      return;
     }
+
     const fullName = `${firstName} ${lastName}`;
 
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          companyName: fullName,
+          email,
+          phoneNumber,
+          password,
+          role: 'employer',
+        })
+      });
 
-  };  
+      if (response.status === 201) {
+        alert('Signup successful!');
+      } else {
+        const data = await response.json();
+        alert(`Signup failed: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error signing up:', error);
+      alert('Error signing up: ' + error.message);
+    }
+  };
+
   return (
     <form onSubmit={handleSignup}>
       <div className="row">
-      <div className="col-lg-6">
+        <div className="col-lg-6">
           <div className="form-group">
             <label className="form-label">Овог</label>
             <input
@@ -39,7 +62,6 @@ const Form = () => {
             />
           </div>
         </div>
-        {/* End .col */}
         <div className="col-lg-6">
           <div className="form-group">
             <label className="form-label">Нэр</label>
@@ -53,9 +75,6 @@ const Form = () => {
             />
           </div>
         </div>
-        {/* End .col */}
-
-       
 
         <div className="col-lg-6">
           <div className="form-group">
@@ -83,7 +102,6 @@ const Form = () => {
             />
           </div>
         </div>
-        {/* End .col */}
 
         <div className="col-lg-6">
           <div className="form-group mb20">
@@ -98,7 +116,6 @@ const Form = () => {
             />
           </div>
         </div>
-        {/* End .col */}
 
         <div className="col-lg-6">
           <div className="form-group mb20">
@@ -113,12 +130,10 @@ const Form = () => {
             />
           </div>
         </div>
-        {/* End .col */}
       </div>
-      {/* End .row */}
-      <button type="submit" className="btn btn-primary btn-block ">Бүртгүүлэх</button>
+      <button type="submit" className="btn btn-primary btn-block">Бүртгүүлэх</button>
     </form>
   );
 };
 
-export default Form;
+export default EmployerForm;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Header from "@/app/components/common/Header";
 import React, { useState } from 'react';
 import Image from "next/image";
@@ -10,7 +10,16 @@ const ListingV1 = () => {
   const [dates, setDates] = useState([]);
   const [startTime, setStartTime] = useState("00:00");
   const [endTime, setEndTime] = useState("00:00");
-  console.log(dates);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [position, setPosition] = useState("");
+  const [salary, setSalary] = useState("");
+  const [salaryPayType, setSalaryPayType] = useState("");
+  const [salaryPayday, setSalaryPayday] = useState("");
+  const [warning, setWarning] = useState("");
+  const [additional, setAdditional] = useState("");
+  const [contractType, setContractType] = useState("");
+
   const handleStartTimeChange = (time) => {
     setStartTime(time);
   };
@@ -19,13 +28,44 @@ const ListingV1 = () => {
     setEndTime(time);
   };
 
-  const time = 
-    {
-      label: "Төрөл",
-      name: "condition",
-      type: "select",
-      options: ["Цагаар", "Өдрөөр", "Сараар"],
+  const time = {
+    label: "Төрөл",
+    name: "condition",
+    type: "select",
+    options: ["Цагаар", "Өдрөөр", "Сараар"],
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('/api/createContract', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phoneNumber,
+          type: contractType,
+          address,
+          position,
+          duration: dates.join(' to '),
+          schedule: `${startTime} - ${endTime}`,
+          salary: parseFloat(salary),
+          salaryPayType,
+          salaryPayday,
+          warning,
+          additional,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Contract created successfully!');
+      } else {
+        alert('Failed to create contract');
+      }
+    } catch (error) {
+      console.error('Error creating contract:', error);
     }
+  };
   
   const renderStep1 = () => (
     <div >
@@ -66,6 +106,8 @@ const ListingV1 = () => {
               className="form-control"
               rows={6}
               placeholder="Байршилаа оруулна уу."
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               required
             />
           </div>
@@ -85,6 +127,8 @@ const ListingV1 = () => {
               className="form-control"
               type="text"
               placeholder="Дугаар"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
           </div>
@@ -300,9 +344,9 @@ const ListingV1 = () => {
   const renderStep10 = () => (
     <div>
       <h2 className="main-title mb-8">Гэрээ</h2>
+      <button className="btn-next position-relative mr10 p-3" onClick={handleSubmit}>Submit</button>
     </div>
   );
-
   return (
     <div className="wrapper">
       <Header />
@@ -324,59 +368,53 @@ const ListingV1 = () => {
           </div>
         </section>
 
-
         <section className="our-pricing pb90 pt0 bgc-f9 ">
-      <div className="container">
-        <div className="new_property_form">
-        {step === 1 && renderStep1()}
-        {step === 2 && renderStep2()}
-        {step === 3 && renderStep3()}
-        {step === 4 && renderStep4()}
-        {step === 5 && renderStep5()}
-        {step === 6 && renderStep6()}
-        {step === 7 && renderStep7()}
-        {step === 8 && renderStep8()}
-        {step === 9 && renderStep9()}
-        {step === 10 && renderStep10()}
-          <div className="row mr40 ml40 mt40">
-            <div className="col-lg-12">
-              <div className="row">
-              {step!=1 ? (
-                <>
-                 <div className="col-sm-2" >
-                  <div className="mb20">
-                    {/* <button className="btn-next position-relative mr10 p-3" onClick={() => setStep(2)}>Өмнөх</button> */}
-                    <button className="btn-next position-relative p-3"  onClick={() => setStep(step === 1 ? 1 : step - 1)}>Өмнөх</button>
-                  </div>
-                </div>
-              </>
-            ) : 
-            <>
-                <div className="col-sm-2" >
-                  
-                </div>
-              </>
-           }
-                
-                <div className="col-sm-6"></div>
-                <div className="col-sm-2">
-                  <div className="mb20">
-                    {/* <button className="btn-cancel position-relative p-3">Алгасах</button> */}
-                    <button className="btn-cancel position-relative p-3" onClick={() => setStep(step === 10 ? 10 : step + 1)}>Алгасах</button>
-                  </div>
-                </div>
-                <div className="col-sm-2">
-                  <div className="mb20">
-                    {/* <button className="btn-next position-relative mr10 p-3">Дараах</button> */}
-                    <button className="btn-next position-relative mr10 p-3" onClick={() => setStep(step === 10 ? 10 : step + 1)}>Дараах</button>
+          <div className="container">
+            <div className="new_property_form">
+              {step === 1 && renderStep1()}
+              {step === 2 && renderStep2()}
+              {step === 3 && renderStep3()}
+              {step === 4 && renderStep4()}
+              {step === 5 && renderStep5()}
+              {step === 6 && renderStep6()}
+              {step === 7 && renderStep7()}
+              {step === 8 && renderStep8()}
+              {step === 9 && renderStep9()}
+              {step === 10 && renderStep10()}
+              <div className="row mr40 ml40 mt40">
+                <div className="col-lg-12">
+                  <div className="row">
+                    {step !== 1 ? (
+                      <>
+                        <div className="col-sm-2">
+                          <div className="mb20">
+                            <button className="btn-next position-relative p-3" onClick={() => setStep(step === 1 ? 1 : step - 1)}>Өмнөх</button>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="col-sm-2">
+                        </div>
+                      </>
+                    )}
+                    <div className="col-sm-6"></div>
+                    <div className="col-sm-2">
+                      <div className="mb20">
+                        <button className="btn-cancel position-relative p-3" onClick={() => setStep(step === 10 ? 10 : step + 1)}>Алгасах</button>
+                      </div>
+                    </div>
+                    <div className="col-sm-2">
+                      <div className="mb20">
+                        <button className="btn-next position-relative mr10 p-3" onClick={() => setStep(step === 10 ? 10 : step + 1)}>Дараах</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
       </div>
     </div>
   );
