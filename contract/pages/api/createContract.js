@@ -6,6 +6,9 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { phoneNumber, type, address, position, duration, schedule, salary, salaryPayType, salaryPayday, warning, additional } = req.body;
 
+    // Get the employer UID from your authentication/session mechanism
+    const employer = req.headers['employer-uid'];
+
     try {
       // Find the user by phone number
       const user = await prisma.user.findUnique({
@@ -19,7 +22,7 @@ export default async function handler(req, res) {
       // Create the contract
       const newContract = await prisma.contract.create({
         data: {
-          uid: user.uid,
+          employer,
           type,
           address,
           number: phoneNumber,
@@ -31,7 +34,8 @@ export default async function handler(req, res) {
           salaryPayday,
           warning,
           additional,
-          userId: user.uid,
+          status: 'Баталгаажаагүй',
+          employeeId: user.uid,
         },
       });
 

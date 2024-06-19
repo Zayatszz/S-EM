@@ -69,7 +69,8 @@ const SignIn = () => {
               <div className="text-center mb-4">
                 <Image src="/images/user.png" alt="User Icon" width={100} height={90} />
               </div>
-              <form onSubmit={handleLogin}>
+              {/* onSubmit={handleLogin} */}
+              <form >
                 <div className="mb-2 mr-sm-2">
                   <label className="form-label">И-мэйл хаяг</label>
                   <input
@@ -96,13 +97,13 @@ const SignIn = () => {
                 <p>
                   Бүртгэлгүй бол бүртгүүлнэ үү. <Link href="/signup">Бүртгүүлэх.</Link>
                 </p>
-                <div className="col-md-7 text-center">
+                {/* <div className="col-md-7 text-center">
                   <div className='ml100 mr100'>
                     <button type="submit" className="btn-next position-relative p-2" style={{color:"white"}}>
                       Нэвтрэх
                     </button>
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
@@ -110,7 +111,7 @@ const SignIn = () => {
           </div>
           <div className="col-md-7 text-center">
             <div className='ml100 mr100'>
-              <button type="submit" className="btn-next position-relative p-2" style={{color:"white"}}>
+              <button onClick={handleLogin} className="btn-next position-relative p-2" style={{color:"white"}}>
                 Нэвтрэх
               </button>
             </div>

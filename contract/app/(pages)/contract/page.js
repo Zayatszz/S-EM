@@ -37,10 +37,15 @@ const ListingV1 = () => {
 
   const handleSubmit = async () => {
     try {
+      
+      const user = JSON.parse(localStorage.getItem('user'));
+      const employerUid = user.uid; // Fetch this from storage or context
+
       const response = await fetch('/api/createContract', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'employer-uid': employerUid,
         },
         body: JSON.stringify({
           phoneNumber,
@@ -66,7 +71,7 @@ const ListingV1 = () => {
       console.error('Error creating contract:', error);
     }
   };
-  
+
   const renderStep1 = () => (
     <div >
       <h2 className="main-title mb-8">Та ямар төрлийн ажлын гэрээ байгуулах вэ?</h2>
@@ -136,6 +141,7 @@ const ListingV1 = () => {
       </div>
     </div>
   );
+
   const renderStep4 = () => (
     <div>
       <h2 className="main-title mb-8">Ажилчны албан тушаалыг оруулна уу.</h2>
@@ -147,6 +153,8 @@ const ListingV1 = () => {
               className="form-control"
               type="text"
               placeholder="Албан тушаал"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
               required
             />
           </div>
@@ -154,21 +162,21 @@ const ListingV1 = () => {
       </div>
     </div>
   );
+
   const renderStep5 = () => (
     <div>
       <h2 className="main-title mb-8">Ажиллах хугацаагаа оруулна уу.</h2>
-    
       <div className="mb-4 m50 mr70">
         <div className="col-lg-12">
-            <div className="row">
+          <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-              <label className="form-label">Эхлэх хугацаа</label>
+                <label className="form-label">Эхлэх хугацаа</label>
               </div>
             </div>
             <div className="col-md-6">
               <div className="form-group">
-              <label className="form-label">Дуусах хугацаа</label>
+                <label className="form-label">Дуусах хугацаа</label>
               </div>
             </div>
           </div>
@@ -192,77 +200,80 @@ const ListingV1 = () => {
       </div>
     </div>
   );
+
   const renderStep6 = () => (
     <div>
       <h2 className="main-title mb-8">Ажиллах цагаа тодорхой оруулна уу.</h2>
-    
       <div className="mb-4 m50 ">
         <div className="col-lg-12">
-            <div className="row">
+          <div className="row">
             <div className="col-md-6">
               <div className="form-group">
-              <label className="form-label">Эхлэх цаг</label>
+                <label className="form-label">Эхлэх цаг</label>
               </div>
             </div>
             <div className="col-md-6">
               <div className="form-group">
-              <label className="form-label">Дуусах цаг</label>
+                <label className="form-label">Дуусах цаг</label>
               </div>
             </div>
           </div>
         </div>
         <div className="col-lg-12">
-            <div className="row">
+          <div className="row">
             <div className="col-lg-6">
-                 
-                    <input
-                      className="form-control form_control"
-                      type="time"
-                      value={startTime}
-                      onChange={(e) => handleStartTimeChange(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-lg-6">
-                    {/* <span className="form-label">Дуусах цаг</span> */}
-                    <input
-                      className="form-control form_control"
-                      type="time"
-                      value={endTime}
-                      onChange={(e) => handleEndTimeChange(e.target.value)}
-                    />
-                  </div>
+              <input
+                className="form-control form_control"
+                type="time"
+                value={startTime}
+                onChange={(e) => handleStartTimeChange(e.target.value)}
+              />
+            </div>
+            <div className="col-lg-6">
+              <input
+                className="form-control form_control"
+                type="time"
+                value={endTime}
+                onChange={(e) => handleEndTimeChange(e.target.value)}
+              />
+            </div>
           </div>
         </div>
-      
       </div>
     </div>
   );
+
   const renderStep7 = () => (
     <div>
-         <div className="col-lg-12">
-            <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <h2 className="main-title mb-8">Ажилчны цалин ямар байх вэ?</h2>
-                <div className="ml50">
-                  <div className="col-lg-12">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="form-label">Цалин</label>
-                          <input
-                            className="form-control"
-                            type="text"
-                            placeholder="Цалин"
-                            required
-                          />
-                        </div>
+      <div className="col-lg-12">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-group">
+              <h2 className="main-title mb-8">Ажилчны цалин ямар байх вэ?</h2>
+              <div className="ml50">
+                <div className="col-lg-12">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label className="form-label">Цалин</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          placeholder="Цалин"
+                          value={salary}
+                          onChange={(e) => setSalary(e.target.value)}
+                          required
+                        />
                       </div>
-                    <div className="col-sm-6 col-md-4" >
+                    </div>
+                    <div className="col-sm-6 col-md-4">
                       <div className="ui_kit_select_search add_new_property ">
                         <label className="form-label">{time.label}</label>
-                        <select className="form-select">
-                        
+                        <select
+                          className="form-select"
+                          value={salaryPayType}
+                          onChange={(e) => setSalaryPayType(e.target.value)}
+                        >
                           {time.options.map((option) => (
                             <option key={option} data-tokens={option}>
                               {option}
@@ -272,34 +283,32 @@ const ListingV1 = () => {
                       </div>
                     </div>
                   </div>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="form-group">
-                <h2 className="main-title mb-8">Цалингаа хэдэн өдөрт авах вэ?</h2>
-               
-                <div className="mr50">
+          </div>
+          <div className="col-md-6">
+            <div className="form-group">
+              <h2 className="main-title mb-8">Цалингаа хэдэн өдөрт авах вэ?</h2>
+              <div className="mr50">
                 <div className="col-md-12">
                   <div className="form-group">
-                    <label className="form-label">Албан тушаал</label>
+                    <label className="form-label">Төлбөрийн өдөр</label>
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Албан тушаал"
+                      placeholder="Төлбөрийн өдөр"
+                      value={salaryPayday}
+                      onChange={(e) => setSalaryPayday(e.target.value)}
                       required
                     />
                   </div>
                 </div>
               </div>
-              </div>
             </div>
           </div>
         </div>
-     
-      
-  
+      </div>
     </div>
   );
 
@@ -314,6 +323,8 @@ const ListingV1 = () => {
               className="form-control"
               type="text"
               placeholder="Хугацаа"
+              value={warning}
+              onChange={(e) => setWarning(e.target.value)}
               required
             />
           </div>
@@ -321,6 +332,7 @@ const ListingV1 = () => {
       </div>
     </div>
   );
+
   const renderStep9 = () => (
     <div>
       <h2 className="main-title mb-8">Та нэмэлт мэдээлэл оруулахыг хүсч байна уу?.</h2>
@@ -334,6 +346,8 @@ const ListingV1 = () => {
               className="form-control"
               rows={6}
               placeholder="Нэмэлт мэдээлэл"
+              value={additional}
+              onChange={(e) => setAdditional(e.target.value)}
               required
             />
           </div>
@@ -341,12 +355,14 @@ const ListingV1 = () => {
       </div>
     </div>
   );
+
   const renderStep10 = () => (
     <div>
       <h2 className="main-title mb-8">Гэрээ</h2>
       <button className="btn-next position-relative mr10 p-3" onClick={handleSubmit}>Submit</button>
     </div>
   );
+
   return (
     <div className="wrapper">
       <Header />
@@ -358,8 +374,8 @@ const ListingV1 = () => {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: `${step === 1 ? 0 : step === 2 ? 10 : step === 3 ? 20 : step === 4 ? 30 : step === 5 ? 40 : step === 6 ? 50 : step === 7 ? 60 : step === 8 ? 70 : step === 9 ? 80 : step === 10 ? 90   : 100}%`, background:"#2583EF" }}
-                  aria-valuenow={step === 1 ? 0 : step === 2 ? 10 : step === 3 ? 20 : step === 4 ? 30 : step === 5 ? 40 : step === 6 ? 50 : step === 7 ? 60 : step === 8 ? 70 : step === 9 ? 80 : step === 10 ? 90   : 100}
+                  style={{ width: `${step === 1 ? 0 : step === 2 ? 10 : step === 3 ? 20 : step === 4 ? 30 : step === 5 ? 40 : step === 6 ? 50 : step === 7 ? 60 : step === 8 ? 70 : step === 9 ? 80 : step === 10 ? 90 : 100}%`, background:"#2583EF" }}
+                  aria-valuenow={step === 1 ? 0 : step === 2 ? 10 : step === 3 ? 20 : step === 4 ? 30 : step === 5 ? 40 : step === 6 ? 50 : step === 7 ? 60 : step === 8 ? 70 : step === 9 ? 80 : step === 10 ? 90 : 100}
                   aria-valuemin="0"
                   aria-valuemax="100"
                 ></div>
@@ -368,7 +384,7 @@ const ListingV1 = () => {
           </div>
         </section>
 
-        <section className="our-pricing pb90 pt0 bgc-f9 ">
+        <section className="our-pricing pb90 pt0 bgc-f9">
           <div className="container">
             <div className="new_property_form">
               {step === 1 && renderStep1()}

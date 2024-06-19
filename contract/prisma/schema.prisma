@@ -9,21 +9,22 @@ datasource db {
 }
 
 model Contract {
-  id            String  @id @default(uuid())
-  uid           String  @unique
+  id            Int     @id @default(autoincrement())
+  employer      String
   type          String
   address       String
   number        String
   position      String
   duration      String
   schedule      String
-  salary        Float
+  salary        Float?
   salaryPayday  String
   salaryPayType String
   warning       String?
   additional    String?
-  userId        String
-  user          User    @relation(fields: [userId], references: [uid])
+  status        String  @default("Pending") // Added status field with default value
+  employeeId    String
+  employee      User    @relation(fields: [employeeId], references: [uid])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
